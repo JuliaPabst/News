@@ -25,7 +25,7 @@ export default function Overview({ selectedTopic, selectedQuestion }) {
     articles.filter(
       (article) =>
         article.urlToImage && article.author && article.title.length < 100
-    ).length == 0
+    ).length === 0
   ) {
     return (
       <div>
