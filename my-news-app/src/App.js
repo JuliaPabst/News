@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import Header from "./Header";
+import Overview from "./Overview";
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState("&category=general");
+  const [selectedQuestion, setSelectedQuestion] = useState("");
+
+  const changeSelectedTopic = (topic) => {
+    setSelectedTopic(topic);
+  };
+
+  const changeSelectedQuestion = (question) => {
+    setSelectedQuestion(question);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <Header
+          onSelectedTopicChange={changeSelectedTopic}
+          onSelectedQuestionChange={changeSelectedQuestion}
+        />
       </header>
+
+      <Overview
+        selectedTopic={selectedTopic}
+        selectedQuestion={selectedQuestion}
+      />
     </div>
   );
 }
