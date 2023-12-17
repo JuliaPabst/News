@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f7f7f7;
+  font-family: Newsread;
 }
 
 code {
@@ -12,6 +14,10 @@ code {
     monospace;
 }
 
+.logo {
+  height: 40px;
+  padding-left: 20px;
+}
 .card-img-top {
   height: 220px; /* Adjust as needed */
   object-fit: cover; /* This will cover the area without stretching the image */
@@ -19,6 +25,11 @@ code {
 
 .card {
   height: 500px;
+  border-radius: 0px;
+  margin: 0px;
+  padding: 0px;
+  border-width: 1px;
+  border-color: rgb(244, 244, 244);
 }
 
 h2 {
@@ -30,11 +41,39 @@ h2 {
   color: black;
 }
 
-button {
+.category {
   background-color: var(--bg-gradient);
   border-width: 0px;
+  font-weight: 600;
+  color: white;
+}
+
+.extra-bold {
+  font-weight: 900;
+  color: white;
 }
 
 header {
   width: 100%;
+}
+
+.no-padding-no-margin {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  background-color: black;
+}
+
+.search {
+  background-color: white;
+  color: black;
+  margin-left: 5px;
 }

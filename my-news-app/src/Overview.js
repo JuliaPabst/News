@@ -21,6 +21,17 @@ export default function Overview({ selectedTopic, selectedQuestion }) {
 
   if (isLoading) {
     return <div>Loading...</div>;
+  } else if (
+    articles.filter(
+      (article) =>
+        article.urlToImage && article.author && article.title.length < 100
+    ).length == 0
+  ) {
+    return (
+      <div>
+        <p>No articles found!</p>
+      </div>
+    );
   }
 
   return (
@@ -33,7 +44,10 @@ export default function Overview({ selectedTopic, selectedQuestion }) {
           )
           .slice(0, 9)
           .map((article, index) => (
-            <div key={index} className="col-md-6 col-lg-4 mb-3">
+            <div
+              key={index}
+              className="col-md-6 col-lg-4 mb-3 no-padding-no-margin"
+            >
               <div className="card">
                 <img
                   src={article.urlToImage}
@@ -42,7 +56,9 @@ export default function Overview({ selectedTopic, selectedQuestion }) {
                 />
                 <div className="card-body">
                   <h2 className="card-title">{article.title}</h2>
-                  <p className="card-text">{article.author}</p>
+                  <p className="card-text">
+                    {article.author} from {article.source.name}
+                  </p>
                   <a
                     href={article.url}
                     target="_blank"
@@ -55,6 +71,7 @@ export default function Overview({ selectedTopic, selectedQuestion }) {
             </div>
           ))}
       </div>
+      <p>A website by Julia Pabst</p>
     </div>
   );
 }

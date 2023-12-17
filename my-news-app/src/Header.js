@@ -1,4 +1,13 @@
 import React, { useState, useEffect } from "react";
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
+import logo from "./logo.png";
 
 export default function Header({
   onSelectedTopicChange,
@@ -10,104 +19,113 @@ export default function Header({
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentDate(new Date());
-    }, 1000); 
-    return () => clearInterval(timer); 
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
+
+  const formatTime = (date) => {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   const handleInputChange = (event) => {
     setSearchTopic(event.target.value);
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     onSelectedQuestionChange(`&q=${searchTopic}`);
   };
 
   return (
-    <div id="header">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <li class="nav-item active">
-          <button id="dateAndTime" disabled>
-            {currentDate.toLocaleString()}
-          </button>
-        </li>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <button
-                onClick={() => onSelectedTopicChange("&category=general")}
-              >
-                General
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                onClick={() => onSelectedTopicChange("&category=business")}
-              >
-                Business
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                onClick={() => onSelectedTopicChange("&category=science")}
-              >
-                Science
-              </button>
-            </li>
-            <li class="nav-item">
-              <button onClick={() => onSelectedTopicChange("&category=health")}>
-                Health
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                onClick={() => onSelectedTopicChange("&category=technology")}
-              >
-                Technology
-              </button>
-            </li>
-            <li class="nav-item">
-              <button onClick={() => onSelectedTopicChange("&category=sports")}>
-                Sports
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                onClick={() => onSelectedTopicChange("&category=entertainment")}
-              >
-                Entertainment
-              </button>
-            </li>
-          </ul>
-          <form
-            class="form-inline my-2 my-lg-0"
-            id="searchForm"
-            onSubmit={handleSubmit}
+    <Navbar className="header" expand="lg">
+      <Navbar.Brand href="#" className="extra-bold">
+        <img src={logo} alt="Daily News" className="logo" />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <NavItem>
+            <Button variant="light" disabled className="category">
+              {formatTime(currentDate)}
+            </Button>
+          </NavItem>
+          <NavItem>
+            <Button
+              variant="light"
+              onClick={() => onSelectedTopicChange("&category=general")}
+              className="category"
+            >
+              General
+            </Button>
+          </NavItem>
+          <NavItem>
+            <Button
+              variant="light"
+              className="category"
+              onClick={() => onSelectedTopicChange("&category=business")}
+            >
+              Business
+            </Button>
+          </NavItem>
+          <NavItem>
+            <Button
+              variant="light"
+              className="category"
+              onClick={() => onSelectedTopicChange("&category=science")}
+            >
+              Science
+            </Button>
+          </NavItem>
+          <NavItem>
+            <Button
+              variant="light"
+              className="category"
+              onClick={() => onSelectedTopicChange("&category=health")}
+            >
+              Health
+            </Button>
+          </NavItem>
+          <NavItem>
+            <Button
+              variant="light"
+              className="category"
+              onClick={() => onSelectedTopicChange("&category=technology")}
+            >
+              Technology
+            </Button>
+          </NavItem>
+          <NavItem>
+            <Button
+              variant="light"
+              className="category"
+              onClick={() => onSelectedTopicChange("&category=sports")}
+            >
+              Sports
+            </Button>
+          </NavItem>
+        </Nav>
+        <Form onSubmit={handleSubmit} className="form-inline">
+          <FormControl
+            type="search"
+            placeholder="Search"
+            className="mr-sm-2 form"
+            onChange={handleInputChange}
+            id="searchInput"
+            name="search"
+          />
+          <Button
+            variant="outline-success"
+            type="submit"
+            className="form search"
           >
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={handleInputChange}
-            ></input>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </nav>
-    </div>
+            Search
+          </Button>
+        </Form>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }

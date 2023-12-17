@@ -9,6 +9,7 @@ function App() {
 
   const changeSelectedTopic = (topic) => {
     setSelectedTopic(topic);
+    setSelectedQuestion("");
   };
 
   const changeSelectedQuestion = (question) => {
@@ -23,7 +24,6 @@ function App() {
           onSelectedQuestionChange={changeSelectedQuestion}
         />
       </header>
-
       <Overview
         selectedTopic={selectedTopic}
         selectedQuestion={selectedQuestion}
